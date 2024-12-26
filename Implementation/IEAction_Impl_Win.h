@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "IEActions.hpp"
+#include "IEActions.h"
 
 #if defined (_WIN32)
 #include <atlbase.h> 

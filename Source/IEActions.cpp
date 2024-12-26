@@ -2,7 +2,7 @@
 // Copyright © Interactive Echoes. All rights reserved.
 // Author: mozahzah
 
-#include "IEActions.hpp"
+#include "IEActions.h"
 
 #include "Implementation/IEAction_Impl_Win.hpp"
 #include "Implementation/IEAction_Impl_Apple.hpp"
