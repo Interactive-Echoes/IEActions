@@ -2,7 +2,7 @@
 # Copyright © 2024 Interactive Echoes. All rights reserved.
 # Author: mozahzah
 
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.20)
 project(IEActions VERSION 1.0.0 LANGUAGES CXX)
 
 message("\n------------------------------------------------------------")
@@ -27,11 +27,11 @@ if(WIN32)
 endif()
 
 file(GLOB IMPL_CPP_FILES "./Implementation/*.cpp")
-file(GLOB SOURCE_FILES "./*.cpp")
+file(GLOB SOURCE_FILES "./Source/*.cpp")
 list(APPEND SOURCE_FILES ${IMPL_CPP_FILES})
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC ".")
-file(GLOB HEADER_FILES "./*.hpp")
+file(GLOB HEADER_FILES "./*.h")
 set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER ${HEADER_FILES})
 
 if(WIN32)

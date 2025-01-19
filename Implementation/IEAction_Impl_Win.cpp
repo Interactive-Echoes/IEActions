@@ -2,7 +2,7 @@
 // Copyright © 2024 Interactive Echoes. All rights reserved.
 // Author: mozahzah
 
-#include "Implementation/IEAction_Impl_Win.hpp"
+#include "Implementation/IEAction_Impl_Win.h"
 
 #if defined (_WIN32)
 

@@ -2,7 +2,7 @@
 # Copyright © 2024 Interactive Echoes. All rights reserved.
 # Author: mozahzah
 
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.20)
 project(IEActionsExample VERSION 1.0.0 LANGUAGES CXX)
 
 message("\n------------------------------------------------------------")

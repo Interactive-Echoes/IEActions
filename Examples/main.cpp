@@ -2,7 +2,7 @@
 // Copyright © 2024 Interactive Echoes. All rights reserved.
 // Author: mozahzah
 
-#include "IEActions.hpp"
+#include "IEActions.h"
 #include <cstdint>
 #include <iostream>
 #include <memory>
