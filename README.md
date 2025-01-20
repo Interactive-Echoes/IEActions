@@ -11,6 +11,9 @@
 **IEActions** is a open-source extension library designed for Windows and macOS applications.  
 It provides an abstracted action class that enables programmatic execution of various actions such as volume control, muting, console commands, and file opening. This library serves as a versatile interface for managing different OS actions in applications.
 
+> [!IMPORTANT] 
+> For installation and integration instructions, please refer to the Wiki here: [IEActions Wiki](https://github.com/mozahzah/IEActions/wiki)
+
 ## Available Actions
 - **Volume Control**: Adjusts the global audio output level.
 - **Global Mute**: Mute global audio output.
