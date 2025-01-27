@@ -40,6 +40,13 @@ elseif(APPLE)
   set(CMAKE_OSX_SYSROOT /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk)
   find_library(COREAUDIO_LIBRARY CoreAudio)
   target_link_libraries(${PROJECT_NAME} PUBLIC ${COREAUDIO_LIBRARY})
+elseif(LINUX)
+  find_package(ALSA)
+  if(ALSA_FOUND OR ALSA)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${ALSA_LIBRARIES})
+    target_include_directories(${PROJECT_NAME} PUBLIC ${ALSA_INCLUDE_DIRS})
+    message("ALSA ${ALSA_INCLUDE_DIRS}")
+  endif()
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES 
