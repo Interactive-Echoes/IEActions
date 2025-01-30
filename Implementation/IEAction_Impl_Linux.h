@@ -7,7 +7,7 @@
 #include "IEActions.h"
 
 #if defined (__linux__)
-#include "alsa/mixer.h"
+#include "IEAudio4Linux.h"
 
 class IEAction_Volume_Impl_Linux : public IEAction_Volume
 {
@@ -20,11 +20,11 @@ public:
     void SetVolume(float Volume) override;
 
 private:
-    snd_mixer_elem_t* m_MasterMixerElement;
-    snd_mixer_t* m_MixerHandle;
-    snd_mixer_selem_id_t* m_MixerSelemID;
-    const char* m_CardName = "default";
-    const char* m_SelemName = "Master";
+    static void MixerEventCallback(void* UserData);
+
+private:
+    IEMixerElement& m_IEMixerElement;
+    const uint32_t m_MixerEventCallbackID;
 };
 
 class IEAction_Mute_Impl_Linux : public IEAction_Mute
@@ -36,13 +36,13 @@ public:
 public:
     bool GetMute() const override;
     void SetMute(bool bMute) override;
-   
+
 private:
-    snd_mixer_elem_t* m_MasterMixerElement;
-    snd_mixer_t* m_MixerHandle;
-    snd_mixer_selem_id_t* m_MixerSelemID;
-    const char* m_CardName = "default";
-    const char* m_SelemName = "Master";
+    static void MixerEventCallback(void* UserData);
+
+private:
+    IEMixerElement& m_IEMixerElement;
+    uint32_t m_MixerEventCallbackID = 0;
 };
 
 class IEAction_ConsoleCommand_Impl_Linux : public IEAction_ConsoleCommand

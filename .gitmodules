@@ -1,0 +1,3 @@
+[submodule "ThirdParty/IEAudio4Linux"]
+	path = ThirdParty/IEAudio4Linux
+	url = https://github.com/Interactive-Echoes/IEAudio4Linux.git

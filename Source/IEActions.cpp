@@ -6,6 +6,7 @@
 
 #include "Implementation/IEAction_Impl_Win.h"
 #include "Implementation/IEAction_Impl_Apple.h"
+#include "Implementation/IEAction_Impl_Linux.h"
 
 namespace IEAction
 {
@@ -16,7 +17,7 @@ namespace IEAction
 #elif defined (__APPLE__)
         return std::make_unique<IEAction_Volume_Impl_Apple>();
 #elif defined (__linux__)
-        return std::unique_ptr<IEAction_Volume>();
+        return std::make_unique<IEAction_Volume_Impl_Linux>();
 #endif
     }
 
@@ -27,7 +28,7 @@ namespace IEAction
 #elif defined (__APPLE__)
         return std::make_unique<IEAction_Mute_Impl_Apple>();
 #elif defined (__linux__)
-        return std::unique_ptr<IEAction_Mute>();
+        return std::make_unique<IEAction_Mute_Impl_Linux>();
 #endif
     }
 
@@ -38,7 +39,7 @@ namespace IEAction
 #elif defined (__APPLE__)
         return std::make_unique<IEAction_ConsoleCommand_Impl_Apple>();
 #elif defined (__linux__)
-        return std::unique_ptr<IEAction_ConsoleCommand>();
+        return std::make_unique<IEAction_ConsoleCommand_Impl_Linux>();
 #endif
     }
 
@@ -49,7 +50,7 @@ namespace IEAction
 #elif defined (__APPLE__)
         return std::make_unique<IEAction_OpenFile_Impl_Apple>();
 #elif defined (__linux__)
-        return std::unique_ptr<IEAction_OpenFile>();
+        return std::make_unique<IEAction_OpenFile_Impl_Linux>();
 #endif
     }
 }
