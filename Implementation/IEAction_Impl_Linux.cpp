@@ -84,7 +84,7 @@ void IEAction_ConsoleCommand_Impl_Linux::ExecuteConsoleCommand(const std::string
 
 void IEAction_OpenFile_Impl_Linux::OpenFile(const std::string& FilePath)
 {
-    std::string OpenFileCommand = "open \"" + FilePath + "\"";
+    std::string OpenFileCommand = "xdg-open \"" + FilePath + "\"";
     int result = system(OpenFileCommand.c_str());
 }
 #endif
