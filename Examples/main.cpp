@@ -2,14 +2,16 @@
 // Copyright © Interactive Echoes. All rights reserved.
 // Author: mozahzah
 
-#include "IEActions.h"
 #include <cstdint>
+#include <iomanip>
 #include <iostream>
 #include <memory>
 
+#include "IEActions.h"
+
 void OnVolumeChange(float Volume, void* UserData)
 {
-    std::cout << "Master audio output volume equals " << Volume << " \n";
+    std::cout << "Master audio output volume equals " << std::fixed << std::setprecision(2) << Volume << " \n";
 }
 
 void OnMuteChange(bool bMute, void* UserData)

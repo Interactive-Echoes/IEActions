@@ -20,7 +20,7 @@ public:
     void SetVolume(float Volume) override;
 
 private:
-    static void MixerEventCallback(void* UserData);
+    static void MixerEventCallback(const IEMixerElement& MixerElement, IEMixerElementCallbackType CallbackMask, void* UserData);
 
 private:
     IEMixerElement& m_IEMixerElement;
@@ -38,7 +38,7 @@ public:
     void SetMute(bool bMute) override;
 
 private:
-    static void MixerEventCallback(void* UserData);
+    static void MixerEventCallback(const IEMixerElement& MixerElement, IEMixerElementCallbackType CallbackType, void* UserData);
 
 private:
     IEMixerElement& m_IEMixerElement;

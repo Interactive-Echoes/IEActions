@@ -8,9 +8,8 @@
 #if defined (__linux__)
 IEAction_Volume_Impl_Linux::IEAction_Volume_Impl_Linux() :
     m_IEMixerElement(IEMixerManager::Get().GetIEMixer("default").GetElement("Master")),
-    m_MixerEventCallbackID(m_IEMixerElement.RegisterCallback(&IEAction_Volume_Impl_Linux::MixerEventCallback, this))
+    m_MixerEventCallbackID(m_IEMixerElement.RegisterCallback(&IEAction_Volume_Impl_Linux::MixerEventCallback, IEMixerElementCallbackType::Volume, this))
 {}
-
 
 IEAction_Volume_Impl_Linux::~IEAction_Volume_Impl_Linux()
 {
@@ -27,20 +26,20 @@ void IEAction_Volume_Impl_Linux::SetVolume(float Volume)
     m_IEMixerElement.SetVolume(Volume);
 }
 
-void IEAction_Volume_Impl_Linux::MixerEventCallback(void* UserData)
+void IEAction_Volume_Impl_Linux::MixerEventCallback(const IEMixerElement& MixerElement, IEMixerElementCallbackType CallbackMask, void* UserData)
 {
     if (IEAction_Volume_Impl_Linux* const LinuxVolumeAction = static_cast<IEAction_Volume_Impl_Linux*>(UserData))
     {
         for (const std::pair<uint32_t, std::pair<std::function<void(float, void*)>, void*>>& Element : LinuxVolumeAction->m_VolumeChangeCallbacks)
         {
-            Element.second.first(LinuxVolumeAction->GetVolume(), Element.second.second);
+            Element.second.first(MixerElement.GetVolume().value_or(-1.0f), Element.second.second);
         }
     }
 }
 
 IEAction_Mute_Impl_Linux::IEAction_Mute_Impl_Linux() :
     m_IEMixerElement(IEMixerManager::Get().GetIEMixer("default").GetElement("Master")),
-    m_MixerEventCallbackID(m_IEMixerElement.RegisterCallback(&IEAction_Mute_Impl_Linux::MixerEventCallback, this))
+    m_MixerEventCallbackID(m_IEMixerElement.RegisterCallback(&IEAction_Mute_Impl_Linux::MixerEventCallback, IEMixerElementCallbackType::Mute, this))
 {}
 
 IEAction_Mute_Impl_Linux::~IEAction_Mute_Impl_Linux()
@@ -58,13 +57,13 @@ void IEAction_Mute_Impl_Linux::SetMute(bool bMute)
     m_IEMixerElement.SetMute(bMute);
 }
 
-void IEAction_Mute_Impl_Linux::MixerEventCallback(void* UserData)
+void IEAction_Mute_Impl_Linux::MixerEventCallback(const IEMixerElement& MixerElement, IEMixerElementCallbackType CallbackType, void* UserData)
 {
     if (IEAction_Mute_Impl_Linux* const LinuxMuteAction = static_cast<IEAction_Mute_Impl_Linux*>(UserData))
     {
         for (const std::pair<uint32_t, std::pair<std::function<void(float, void*)>, void*>>& Element : LinuxMuteAction->m_MuteChangeCallbacks)
         {
-            Element.second.first(LinuxMuteAction->GetMute(), Element.second.second);
+            Element.second.first(MixerElement.GetMute().value_or(false), Element.second.second);
         }
     }
 }
