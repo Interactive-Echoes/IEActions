@@ -8,7 +8,7 @@
 
 # IEActions
 
-**IEActions** is a open-source extension library designed for Windows and macOS applications.  
+**IEActions** is an open-source cross platform extension library for app development.  
 It provides an abstracted action class that enables programmatic execution of various actions such as volume control, muting, console commands, and file opening. This library serves as a versatile interface for managing different OS actions in applications.
 
 > [!IMPORTANT] 
