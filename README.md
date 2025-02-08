@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/mozahzah/IECore/raw/master/Resources/IE-Brand-Kit/IE-Logo-Alt-NoBg.png?">
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/mozahzah/IECore/raw/master/Resources/IE-Brand-Kit/IE-Logo-NoBg.png?">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/Interactive-Echoes/IECore/raw/master/Resources/IE-Brand-Kit/IE-Logo-Alt-NoBg.png?">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Interactive-Echoes/IECore/raw/master/Resources/IE-Brand-Kit/IE-Logo-NoBg.png?">
   <img alt="IELogo" width="128">
   </picture>
 </div>
@@ -12,7 +12,7 @@
 It provides an abstracted action class that enables programmatic execution of various actions such as volume control, muting, console commands, and file opening. This library serves as a versatile interface for managing different OS actions in applications.
 
 > [!IMPORTANT] 
-> For installation and integration instructions, please refer to the Wiki here: [IEActions Wiki](https://github.com/mozahzah/IEActions/wiki)
+> For installation and integration instructions, please refer to the Wiki here: [IEActions Wiki](https://github.com/Interactive-Echoes/IEActions/wiki)
 
 ## Available Actions
 - **Volume Control**: Adjusts the global audio output level.
