@@ -21,10 +21,10 @@ message("System name: ${CMAKE_SYSTEM_NAME}")
 message("System version: ${CMAKE_SYSTEM_VERSION}")
 message("System processor: ${CMAKE_SYSTEM_PROCESSOR}")
 
-message("\nGathering ${CMAKE_SYSTEM_NAME} specific files")
+message("Gathering ${CMAKE_SYSTEM_NAME} specific files")
 file(GLOB IEActions_IMPL_CPP_FILES "Implementation/*.cpp")
 
-message("\nGathering source files")
+message("Gathering source files")
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 file(GLOB IEActions_SOURCE_FILES "Source/*.cpp")
 list(APPEND IEActions_SOURCE_FILES ${IEActions_IMPL_CPP_FILES})
