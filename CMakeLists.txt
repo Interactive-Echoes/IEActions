@@ -21,19 +21,21 @@ message("System name: ${CMAKE_SYSTEM_NAME}")
 message("System version: ${CMAKE_SYSTEM_VERSION}")
 message("System processor: ${CMAKE_SYSTEM_PROCESSOR}")
 
-if(WIN32)
-  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-  set(BUILD_SHARED_LIBS TRUE)
-endif()
+message("\nGathering ${CMAKE_SYSTEM_NAME} specific files")
+file(GLOB IEActions_IMPL_CPP_FILES "Implementation/*.cpp")
 
-file(GLOB IEActions_IMPL_CPP_FILES "./Implementation/*.cpp")
-file(GLOB IEActions_SOURCE_FILES "./Source/*.cpp")
+message("\nGathering source files")
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+file(GLOB IEActions_SOURCE_FILES "Source/*.cpp")
 list(APPEND IEActions_SOURCE_FILES ${IEActions_IMPL_CPP_FILES})
+
+message("Creating Library and setting compile time definitions")
 add_library(${PROJECT_NAME} SHARED ${IEActions_SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC ".")
-file(GLOB IEActions_HEADER_FILES "./*.h")
+file(GLOB IEActions_HEADER_FILES "IEActions.h")
 set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER ${IEActions_HEADER_FILES})
 
+message("Linking ${CMAKE_SYSTEM_NAME} specific libraries")
 if(WIN32)
   target_link_libraries(${PROJECT_NAME} PUBLIC ole32 uuid)
 elseif(APPLE)
@@ -41,42 +43,20 @@ elseif(APPLE)
   find_library(COREAUDIO_LIBRARY CoreAudio)
   target_link_libraries(${PROJECT_NAME} PUBLIC ${COREAUDIO_LIBRARY})
 elseif(LINUX)
+  message("Including Third Party Libraries")
   add_subdirectory(ThirdParty/IEAudio4Linux)
   target_link_libraries(${PROJECT_NAME} PUBLIC IEAudio4Linux)
 endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES 
-  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
+message("Setting up install")
 install(TARGETS ${PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
 include(InstallRequiredSystemLibraries)
 
-get_target_property(DEPENDENCIES ${PROJECT_NAME} LINK_LIBRARIES)
-foreach(DEPENDENCY ${DEPENDENCIES})
-  if(TARGET ${DEPENDENCY})
-    message("Setting up dependency: ${DEPENDENCY}")
-
-    set_target_properties(${DEPENDENCY} PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
-    install(TARGETS ${DEPENDENCY}
-        EXPORT "${PROJECT_NAME}Targets"
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-  endif()
-endforeach()
-
+message("Adding extra directories")
 add_subdirectory(Examples)
 
 message("------------------------------------------------------------\n")
