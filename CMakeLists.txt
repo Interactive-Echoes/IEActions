@@ -29,7 +29,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 file(GLOB IEActions_SOURCE_FILES "Source/*.cpp")
 list(APPEND IEActions_SOURCE_FILES ${IEActions_IMPL_CPP_FILES})
 
-message("Creating Library and setting compile time definitions")
+message("Creating Library")
 add_library(${PROJECT_NAME} SHARED ${IEActions_SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC ".")
 file(GLOB IEActions_HEADER_FILES "IEActions.h")
