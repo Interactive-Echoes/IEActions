@@ -57,6 +57,8 @@ install(TARGETS ${PROJECT_NAME}
 include(InstallRequiredSystemLibraries)
 
 message("Adding extra directories")
-add_subdirectory(Examples)
+if(IEACTIONS_INCLUDE_EXAMPLES)
+  add_subdirectory(Examples)
+endif()
 
 message("------------------------------------------------------------\n")
