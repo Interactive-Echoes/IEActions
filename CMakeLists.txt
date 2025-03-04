@@ -5,6 +5,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(IEActions VERSION 1.0.0 LANGUAGES CXX)
 
+set(IEACTIONS_INCLUDE_EXAMPLES FALSE)
+
 message("\n------------------------------------------------------------")
 message("IEActions\n")
 
@@ -22,17 +24,32 @@ message("System version: ${CMAKE_SYSTEM_VERSION}")
 message("System processor: ${CMAKE_SYSTEM_PROCESSOR}")
 
 message("Gathering ${CMAKE_SYSTEM_NAME} specific files")
-file(GLOB IEActions_IMPL_CPP_FILES "Implementation/*.cpp")
+if (WIN32)
+  set(IMPL_FILE 
+    "Implementation/IEAction_Impl_Win.cpp"
+    "Implementation/IEAction_Impl_Win.h"
+  )
+elseif(APPLE)
+  set(IMPL_FILE 
+  "Implementation/IEAction_Impl_Apple.cpp"
+  "Implementation/IEAction_Impl_Apple.h"
+  )
+elseif(LINUX)
+  set(IMPL_FILE 
+  "Implementation/IEAction_Impl_Linux.cpp"
+  "Implementation/IEAction_Impl_Linux.h"
+  )
+endif()
 
 message("Gathering source files")
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-file(GLOB IEActions_SOURCE_FILES "Source/*.cpp")
-list(APPEND IEActions_SOURCE_FILES ${IEActions_IMPL_CPP_FILES})
+set(IEActions_SOURCE_FILES "Source/IEActions.cpp")
+list(APPEND IEActions_SOURCE_FILES ${IMPL_FILE})
 
 message("Creating Library")
 add_library(${PROJECT_NAME} SHARED ${IEActions_SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC ".")
-file(GLOB IEActions_HEADER_FILES "IEActions.h")
+set(IEActions_HEADER_FILES "IEActions.h")
 set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER ${IEActions_HEADER_FILES})
 
 message("Linking ${CMAKE_SYSTEM_NAME} specific libraries")
