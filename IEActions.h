@@ -5,6 +5,7 @@
 #pragma once
 
 #include <algorithm>
+#include <filesystem>
 #include <functional>
 #include <map>
 #include <memory>
@@ -52,7 +53,7 @@ class IEAction_OpenFile
 {
 public:
     virtual ~IEAction_OpenFile() = default;
-    virtual void OpenFile(const std::string& FilePath) = 0;
+    virtual void OpenFile(const std::filesystem::path& FilePath) = 0;
 };
 
 namespace IEAction

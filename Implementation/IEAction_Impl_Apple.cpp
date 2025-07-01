@@ -161,9 +161,9 @@ void IEAction_ConsoleCommand_Impl_Apple::ExecuteConsoleCommand(const std::string
     system(FinalConsoleCommand.c_str());
 }
 
-void IEAction_OpenFile_Impl_Apple::OpenFile(const std::string& FilePath)
+void IEAction_OpenFile_Impl_Apple::OpenFile(const std::filesystem::path& FilePath)
 {
-    std::string OpenFileCommand = "open \"" + FilePath + "\"";
+    std::string OpenFileCommand = "open \"" + FilePath.string() + "\"";
     int result = system(OpenFileCommand.c_str());
 }
 #endif

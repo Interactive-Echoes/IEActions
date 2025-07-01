@@ -54,6 +54,6 @@ public:
 class IEAction_OpenFile_Impl_Linux : public IEAction_OpenFile
 {
 public:
-    void OpenFile(const std::string& FilePath) override;
+    void OpenFile(const std::filesystem::path& FilePath) override;
 };
 #endif

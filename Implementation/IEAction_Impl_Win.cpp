@@ -154,17 +154,20 @@ void IEAction_ConsoleCommand_Impl_Win::ExecuteConsoleCommand(const std::string& 
         FinalConsoleCommand.replace(ValuePosition, 3, ValueStr);
     }
 
-    system(FinalConsoleCommand.c_str());
+    if (!FinalConsoleCommand.empty())
+    {
+        system(FinalConsoleCommand.c_str());
+    }
 }
 
-void IEAction_OpenFile_Impl_Win::OpenFile(const std::string& FilePath)
+void IEAction_OpenFile_Impl_Win::OpenFile(const std::filesystem::path& FilePath)
 {
     SHELLEXECUTEINFOA ShExecInfo = {0};
     ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFOA);
     ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
     ShExecInfo.hwnd = NULL;
     ShExecInfo.lpVerb = "open"; 
-    ShExecInfo.lpFile = FilePath.c_str();
+    ShExecInfo.lpFile = FilePath.string().c_str();
     ShExecInfo.lpDirectory = NULL;
     ShExecInfo.nShow = SW_SHOWNORMAL;
     ShExecInfo.hInstApp = NULL;
